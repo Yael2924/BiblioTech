@@ -17,11 +17,11 @@ return new class extends Migration
                 ->constrained('categorias')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
-            $table->string('titulo');
-            $table->string('autor');
-            $table->string('editorial')->nullable();
+            $table->string('titulo', 200);
+            $table->string('autor',150);
+            $table->string('editorial', 150)->nullable();
             $table->string('isbn',20)->unique();
-            $table->year('anio_publicacion')->nullable();
+            $table->unsignedSmallInteger('anio_publicacion')->nullable();
             $table->string('portada')->nullable();
             $table->boolean('estado')->default(true);
             $table->timestamps();
