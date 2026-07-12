@@ -611,3 +611,193 @@ table td {
 .btn-action.delete {
     color: #EF4444;
 }
+
+/*=========================================
+    LOGIN
+=========================================*/
+
+.login-container {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: var(--background);
+
+}
+
+
+.login-card {
+
+    width: 420px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+
+}
+
+
+.login-logo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.login-logo i {
+
+    font-size: 55px;
+
+    color: var(--primary);
+
+}
+
+
+.login-logo h1 {
+
+    margin-top: 10px;
+
+    font-size: 28px;
+
+}
+
+
+.login-logo span {
+
+    color: var(--primary-light);
+
+}
+
+
+.login-card h2 {
+
+    font-size: 26px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.login-card p {
+
+    color: var(--text-light);
+
+    margin-bottom: 30px;
+
+}
+
+
+
+.input-group {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid var(--border);
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.input-group i {
+
+    color: var(--primary);
+
+    font-size: 20px;
+
+}
+
+
+.input-group input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+.btn-login {
+
+    width: 100%;
+
+    border: none;
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    transition: .3s;
+
+}
+
+
+.btn-login:hover {
+
+    background: var(--primary-light);
+
+}
+
+
+
+.login-error {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+}
