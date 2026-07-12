@@ -30,7 +30,8 @@
 
         <li>
 
-            <a href="#">
+            <a href="{{ route('libros.index') }}"
+            class="{{ request()->routeIs('libros.*') ? 'active' : '' }}">
 
                 <i class="bi bi-book-fill"></i>
 
@@ -42,7 +43,8 @@
 
         <li>
 
-            <a href="#">
+            <a href="{{ route('categorias.index') }}"
+            class="{{ request()->routeIs('categorias.*') ? 'active' : '' }}">
 
                 <i class="bi bi-tags-fill"></i>
 
@@ -54,7 +56,7 @@
 
         <li>
 
-            <a href="#">
+            <a href="{{ route('prestamos.index') }}">
 
                 <i class="bi bi-journal-check"></i>
 
@@ -66,7 +68,7 @@
 
         <li>
 
-            <a href="#">
+            <a href="{{ route('usuarios.index') }}">
 
                 <i class="bi bi-people-fill"></i>
 

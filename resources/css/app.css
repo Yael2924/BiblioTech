@@ -547,3 +547,67 @@ table td {
     }
 
 }
+
+/*=========================================
+    PAGE HEADER
+=========================================*/
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    font-size: 28px;
+}
+
+.page-header p {
+    color: #6B7280;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: .3s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 300px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.btn-action {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.btn-action.edit {
+    color: #2563EB;
+}
+
+.btn-action.delete {
+    color: #EF4444;
+}
