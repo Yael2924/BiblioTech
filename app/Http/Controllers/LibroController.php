@@ -13,12 +13,18 @@ class LibroController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $buscar = $request->input('buscar');
         $libros = Libro::with('categoria')
-                    ->latest()
-                    ->get();
-         return view('libros.index',compact('libros'));
+            ->when($buscar, function($query) use ($buscar){
+                $query->where('titulo','like','%'.$buscar.'%')
+                ->orWhere('autor','like','%'.$buscar.'%')
+                ->orWhere('isbn','like','%'.$buscar.'%');
+            })
+            ->latest()
+            ->paginate(10);
+        return view('libros.index',compact('libros'));
     }
 
     /**
@@ -90,8 +96,11 @@ class LibroController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Libro $libro)
     {
-        //
+        $libro->delete();
+        return redirect()
+            ->route('libros.index')
+            ->with('success', 'Libro eliminado correctamente.');
     }
 }

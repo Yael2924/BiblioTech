@@ -24,10 +24,14 @@
 
     <div class="table-toolbar">
 
-        <input
-            type="text"
-            placeholder="Buscar libro..."
-            class="search-input">
+        <form method="GET" action="{{ route('libros.index') }}">
+            <input
+                type="text"
+                name="buscar"
+                value="{{ request('buscar') }}"
+                placeholder="Buscar por título, autor o ISBN..."
+                class="search-input">
+        </form>
 
     </div>
 
@@ -81,12 +85,19 @@
                     <i class="bi bi-pencil"></i>
                 </a>
 
-                <button class="btn-action delete">
+                <form action="{{ route('libros.destroy', $libro) }}"
+                    method="POST"
+                    style="display:inline"
+                    onsubmit="return confirm('¿Está seguro de eliminar este libro?');">
+                    @csrf
+                    @method('DELETE')
 
-                    <i class="bi bi-trash"></i>
+                    <button class="btn-action delete">
 
-                </button>
+                        <i class="bi bi-trash"></i>
 
+                    </button>
+                </form>
             </td>
 
         </tr>
@@ -108,6 +119,10 @@
         </tbody>
 
     </table>
+
+    <div style="margin-top:20px">
+        {{ $libros->links() }}
+    </div>
 
 </div>
 
