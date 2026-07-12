@@ -80,16 +80,14 @@
 
     </ul>
 
-    <div class="logout">
-
-        <a href="#">
-
-            <i class="bi bi-box-arrow-right"></i>
-
-            Cerrar sesión
-
-        </a>
-
+     <div class="logout">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar sesión
+            </button>
+        </form>
     </div>
 
 </aside>
