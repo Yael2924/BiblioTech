@@ -13,7 +13,7 @@
         <p>Administra los libros registrados en la biblioteca.</p>
     </div>
 
-    <a href="#" class="btn-primary">
+    <a href="{{ route('libros.create') }}" class="btn-primary">
         <i class="bi bi-plus-circle"></i>
         Nuevo Libro
     </a>
@@ -24,10 +24,14 @@
 
     <div class="table-toolbar">
 
-        <input
-            type="text"
-            placeholder="Buscar libro..."
-            class="search-input">
+        <form method="GET" action="{{ route('libros.index') }}">
+            <input
+                type="text"
+                name="buscar"
+                value="{{ request('buscar') }}"
+                placeholder="Buscar por título, autor o ISBN..."
+                class="search-input">
+        </form>
 
     </div>
 
@@ -55,77 +59,70 @@
 
         <tbody>
 
+        @forelse($libros as $libro)
+
         <tr>
-
-            <td>1</td>
-
-            <td>Clean Code</td>
-
-            <td>Robert C. Martin</td>
-
-            <td>Programación</td>
-
+            <td>{{ $libro->id }}</td>
+            <td>{{ $libro->titulo }}</td>
+            <td>{{ $libro->autor }}</td>
+            <td>{{ $libro->categoria->nombre }}</td>
             <td>
-                <span class="badge success">
-                    Disponible
-                </span>
+                @if($libro->estado)
+                    <span class="badge success">
+                        Disponible
+                    </span>
+                @else
+                    <span class="badge warning">
+                        Prestado
+                    </span>
+
+                @endif
             </td>
 
             <td>
 
-                <button class="btn-action edit">
+                <a href="{{ route('libros.edit', $libro) }}" class="btn-action edit">
                     <i class="bi bi-pencil"></i>
-                </button>
+                </a>
 
-                <button class="btn-action delete">
-                    <i class="bi bi-trash"></i>
-                </button>
+                <form action="{{ route('libros.destroy', $libro) }}"
+                    method="POST"
+                    style="display:inline"
+                    onsubmit="return confirm('¿Está seguro de eliminar este libro?');">
+                    @csrf
+                    @method('DELETE')
 
+                    <button class="btn-action delete">
+
+                        <i class="bi bi-trash"></i>
+
+                    </button>
+                </form>
             </td>
 
         </tr>
 
+        @empty
+
         <tr>
 
-            <td>2</td>
+        <td colspan="6" style="text-align:center">
 
-            <td>Laravel Up & Running</td>
+        No existen libros registrados.
 
-            <td>Matt Stauffer</td>
-
-            <td>Programación</td>
-
-            <td>
-
-                <span class="badge warning">
-
-                    Prestado
-
-                </span>
-
-            </td>
-
-            <td>
-
-                <button class="btn-action edit">
-
-                    <i class="bi bi-pencil"></i>
-
-                </button>
-
-                <button class="btn-action delete">
-
-                    <i class="bi bi-trash"></i>
-
-                </button>
-
-            </td>
+        </td>
 
         </tr>
+
+        @endforelse
 
         </tbody>
 
     </table>
+
+    <div style="margin-top:20px">
+        {{ $libros->links() }}
+    </div>
 
 </div>
 
