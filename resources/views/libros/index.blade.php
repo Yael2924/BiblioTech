@@ -13,7 +13,7 @@
         <p>Administra los libros registrados en la biblioteca.</p>
     </div>
 
-    <a href="#" class="btn-primary">
+    <a href="{{ route('libros.create') }}" class="btn-primary">
         <i class="bi bi-plus-circle"></i>
         Nuevo Libro
     </a>
@@ -55,63 +55,31 @@
 
         <tbody>
 
-        <tr>
-
-            <td>1</td>
-
-            <td>Clean Code</td>
-
-            <td>Robert C. Martin</td>
-
-            <td>Programación</td>
-
-            <td>
-                <span class="badge success">
-                    Disponible
-                </span>
-            </td>
-
-            <td>
-
-                <button class="btn-action edit">
-                    <i class="bi bi-pencil"></i>
-                </button>
-
-                <button class="btn-action delete">
-                    <i class="bi bi-trash"></i>
-                </button>
-
-            </td>
-
-        </tr>
+        @forelse($libros as $libro)
 
         <tr>
-
-            <td>2</td>
-
-            <td>Laravel Up & Running</td>
-
-            <td>Matt Stauffer</td>
-
-            <td>Programación</td>
-
+            <td>{{ $libro->id }}</td>
+            <td>{{ $libro->titulo }}</td>
+            <td>{{ $libro->autor }}</td>
+            <td>{{ $libro->categoria->nombre }}</td>
             <td>
+                @if($libro->estado)
+                    <span class="badge success">
+                        Disponible
+                    </span>
+                @else
+                    <span class="badge warning">
+                        Prestado
+                    </span>
 
-                <span class="badge warning">
-
-                    Prestado
-
-                </span>
-
+                @endif
             </td>
 
             <td>
 
-                <button class="btn-action edit">
-
+                <a href="{{ route('libros.edit', $libro) }}" class="btn-action edit">
                     <i class="bi bi-pencil"></i>
-
-                </button>
+                </a>
 
                 <button class="btn-action delete">
 
@@ -122,6 +90,20 @@
             </td>
 
         </tr>
+
+        @empty
+
+        <tr>
+
+        <td colspan="6" style="text-align:center">
+
+        No existen libros registrados.
+
+        </td>
+
+        </tr>
+
+        @endforelse
 
         </tbody>
 
