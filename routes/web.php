@@ -19,8 +19,7 @@ Route::middleware('auth')->group(function(){
 
     Route::resource('libros', LibroController::class);
 
-    Route::get('/categorias', [CategoriaController::class, 'index'])
-        ->name('categorias.index');
+    Route::resource('categorias', CategoriaController::class);
 
     Route::get('/prestamos', [PrestamoController::class, 'index'])
         ->name('prestamos.index');

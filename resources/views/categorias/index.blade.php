@@ -1,113 +1,105 @@
 @extends('layouts.app')
 
-@section('title','Categorías')
+@section('title', 'Categorías')
 
-@section('page-title','Gestión de Categorías')
+@section('page-title', 'Categorías')
 
 @section('content')
 
 <div class="page-header">
 
     <div>
-
-        <h2>Categorías</h2>
-
-        <p>Administra las categorías de los libros.</p>
-
+        <h2>Gestión de Categorías</h2>
+        <p>Administra las categorías disponibles para la biblioteca.</p>
     </div>
 
-    <a href="#" class="btn-primary">
-
+    <a href="{{ route('categorias.create') }}" class="btn-primary">
         <i class="bi bi-plus-circle"></i>
-
         Nueva Categoría
-
     </a>
 
 </div>
 
 <div class="table-card">
 
-    <div class="table-toolbar">
-
-        <input
-            type="text"
-            class="search-input"
-            placeholder="Buscar categoría...">
-
-    </div>
-
-    <table>
+    <table class="table">
 
         <thead>
 
             <tr>
-
                 <th>ID</th>
-
                 <th>Nombre</th>
-
                 <th>Descripción</th>
-
-                <th>Acciones</th>
-
+                <th>Estado</th>
+                <th style="width:120px;">Acciones</th>
             </tr>
 
         </thead>
 
         <tbody>
 
+        @forelse($categorias as $categoria)
+
             <tr>
 
-                <td>1</td>
+                <td>{{ $categoria->id }}</td>
 
-                <td>Programación</td>
+                <td>{{ $categoria->nombre }}</td>
 
-                <td>Libros relacionados con desarrollo de software.</td>
+                <td>{{ $categoria->descripcion }}</td>
 
                 <td>
 
-                    <button class="btn-action edit">
+                    @if($categoria->estado)
 
+                        <span class="badge-success">Activa</span>
+
+                    @else
+
+                        <span class="badge-danger">Inactiva</span>
+
+                    @endif
+
+                </td>
+
+                <td>
+
+                    <a href="{{ route('categorias.edit', $categoria) }}" class="btn-action edit">
                         <i class="bi bi-pencil"></i>
+                    </a>
 
-                    </button>
+                    <form action="{{ route('categorias.destroy', $categoria) }}"
+                          method="POST"
+                          style="display:inline;">
 
-                    <button class="btn-action delete">
+                        @csrf
+                        @method('DELETE')
 
-                        <i class="bi bi-trash"></i>
+                        <button
+                            class="btn-action delete"
+                            onclick="return confirm('¿Deseas eliminar esta categoría?')">
 
-                    </button>
+                            <i class="bi bi-trash"></i>
+
+                        </button>
+
+                    </form>
 
                 </td>
 
             </tr>
 
+        @empty
+
             <tr>
 
-                <td>2</td>
-
-                <td>Literatura</td>
-
-                <td>Novelas, cuentos y obras clásicas.</td>
-
-                <td>
-
-                    <button class="btn-action edit">
-
-                        <i class="bi bi-pencil"></i>
-
-                    </button>
-
-                    <button class="btn-action delete">
-
-                        <i class="bi bi-trash"></i>
-
-                    </button>
-
+                <td colspan="5" style="text-align:center;">
+                    No hay categorías registradas.
                 </td>
 
             </tr>
+
+        @endforelse
 
         </tbody>
 
