@@ -20,7 +20,7 @@
 
 <div class="table-card">
 
-    <form action="{{ route('libros.update', $libro) }}" method="POST">
+    <form id="formLibro" action="{{ route('libros.update', $libro) }}" method="POST">
 
         @csrf
         @method('PUT')

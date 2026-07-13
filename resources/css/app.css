@@ -626,3 +626,12 @@ table td {
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+.alert-error {
+    background: #fdecea;
+    color: #b42318;
+    border: 1px solid #f5c2c7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

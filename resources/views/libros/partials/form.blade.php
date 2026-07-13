@@ -5,6 +5,7 @@
         <label>Título</label>
 
         <input
+            id="titulo"
             type="text"
             name="titulo"
             value="{{ old('titulo', $libro->titulo ?? '') }}">
@@ -21,6 +22,7 @@
         <label>Autor</label>
 
         <input
+            id="autor"
             type="text"
             name="autor"
             value="{{ old('autor', $libro->autor ?? '') }}">
@@ -37,6 +39,7 @@
         <label>Editorial</label>
 
         <input
+            id="editorial"
             type="text"
             name="editorial"
             value="{{ old('editorial', $libro->editorial ?? '') }}">
@@ -53,9 +56,18 @@
         <label>ISBN</label>
 
         <input
+            id="isbn"
             type="text"
             name="isbn"
             value="{{ old('isbn', $libro->isbn ?? '') }}">
+
+        <button
+            type="button"
+            id="buscarISBN"
+            class="btn btn-secondary mt-2">
+            Buscar por ISBN
+        </button>
+
         @error('isbn')
             <small class="text-danger">
                 {{ $message }}
@@ -69,6 +81,7 @@
         <label>Año de publicación</label>
 
         <input
+            id="anio_publicacion"
             type="number"
             name="anio_publicacion"
             value="{{ old('anio_publicacion', $libro->anio_publicacion ?? '') }}">
@@ -84,7 +97,7 @@
 
         <label>Categoría</label>
 
-        <select name="categoria_id">
+        <select id="categoria_id" name="categoria_id">
 
             <option value="">Selecciona una categoría</option>
 

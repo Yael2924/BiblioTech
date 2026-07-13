@@ -82,9 +82,18 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
+        if ($categoria->libros()->exists()) {
+
+            return redirect()
+                ->route('categorias.index')
+                ->with('error', 'No puedes eliminar una categoría que tiene libros asociados.');
+
+        }
+
         $categoria->delete();
+
         return redirect()
             ->route('categorias.index')
-            ->with('success','Categoría eliminada correctamente.');
+            ->with('success', 'Categoría eliminada correctamente.');
     }
 }

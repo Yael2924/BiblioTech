@@ -18,6 +18,10 @@ Route::middleware('auth')->group(function(){
     ->name('dashboard');
 
     Route::resource('libros', LibroController::class);
+    Route::get(
+        '/api/libros/isbn/{isbn}',
+        [LibroController::class, 'buscarPorISBN']
+    )->name('libros.buscar-isbn');
 
     Route::resource('categorias', CategoriaController::class);
 

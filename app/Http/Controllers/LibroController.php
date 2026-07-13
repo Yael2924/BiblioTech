@@ -7,6 +7,8 @@ use App\Http\Requests\StoreLibroRequest;
 use App\Models\Libro;
 use App\Models\Categoria;
 use App\Http\Requests\UpdateLibroRequest;
+use App\Services\OpenLibraryService;
+use Illuminate\Http\JsonResponse;
 
 class LibroController extends Controller
 {
@@ -102,5 +104,24 @@ class LibroController extends Controller
         return redirect()
             ->route('libros.index')
             ->with('success', 'Libro eliminado correctamente.');
+    }
+
+    public function buscarPorISBN($isbn, OpenLibraryService $service): JsonResponse
+    {
+        $libro = $service->buscarPorISBN($isbn);
+
+        if (!$libro) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Libro no encontrado.'
+            ]);
+
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $libro
+        ]);
     }
 }

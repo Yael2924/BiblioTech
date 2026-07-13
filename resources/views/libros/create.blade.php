@@ -20,7 +20,7 @@
 
 <div class="table-card">
 
-    <form action="{{ route('libros.store') }}" method="POST">
+    <form id="formLibro" action="{{ route('libros.store') }}" method="POST">
 
         @csrf
 
