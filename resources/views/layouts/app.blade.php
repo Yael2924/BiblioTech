@@ -44,6 +44,12 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            @if(session('error'))
+            <div class="alert-error">
+                {{ session('error') }}
+            </div>
+            @endif
             
             @yield('content')
 
@@ -52,6 +58,48 @@
     </div>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const boton = document.getElementById('buscarISBN');
+
+    if (!boton) return;
+
+    boton.addEventListener('click', async function () {
+
+        const isbn = document.getElementById('isbn').value.trim();
+
+        if (isbn === '') {
+            alert('Ingresa un ISBN.');
+            return;
+        }
+
+        try {
+
+            const respuesta = await fetch(`/api/libros/isbn/${isbn}`);
+
+            const resultado = await respuesta.json();
+
+            if (!resultado.success) {
+                alert(resultado.message);
+                return;
+            }
+
+            document.getElementById('titulo').value = resultado.data.titulo;
+            document.getElementById('autor').value = resultado.data.autor;
+            document.getElementById('editorial').value = resultado.data.editorial;
+            document.getElementById('anio_publicacion').value = resultado.data.anio_publicacion;
+
+        } catch (error) {
+            alert('Error al consultar la API.');
+            console.error(error);
+        }
+
+    });
+
+});
+</script>
 
 </body>
 
