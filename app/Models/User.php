@@ -29,4 +29,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Un usuario puede tener muchos préstamos.
+     */
+    public function prestamos()
+    {
+        return $this->hasMany(Prestamo::class);
+    }
 }
